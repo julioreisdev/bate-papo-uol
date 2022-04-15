@@ -1,0 +1,74 @@
+body {
+    padding-top: 95px;
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    width: 100%;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.11);
+    background-color: #fff;
+}
+
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*  */
+
+.mensagens {
+    width: 100%;
+    margin-bottom: 4.5rem;
+}
+
+.horario {
+    color: #aaa;
+    margin-right: 10px;
+}
+
+.mensagem {
+    width: 100%;
+    margin-bottom: 0.3rem;
+    padding: 0.75rem;
+}
+
+.mensagem-corpo {
+    word-break: break-word;
+}
+
+.mensagem.aviso {
+    background-color: #dcdcdc;
+}
+
+.mensagem.privado {
+    background-color: #ffdede;
+}
+
+.nome {
+    margin-right: 10px;
+}
+
+/*  */
+
+.enviar-mensagem {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0.75rem;
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+}
+
+.enviar-mensagem input {
+    border: none;
+    width: 80%;
+    font-size: 1.1rem;
+    color: #000 !important;
+    padding: 0.25rem;
+}
