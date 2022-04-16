@@ -24,6 +24,12 @@ function entrarNaSala() {
   })
 }
 
+function manterConexao() {
+  setInterval(function() {
+    let promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', usuario)
+  }, 5000);
+}
+
 function condicoesRenderizarConteudo(mensagens, mensagem) {
   if (mensagem.type === "status") {
     mensagens.innerHTML += `
@@ -92,5 +98,30 @@ function pegarMensagens() {
   /* Achei que com 3s o chat fica desatualizado*/
 }
 
+function enviarMensagem() {
+  let texto = document.querySelector('.enviar-mensagem input');
+
+  let mensagem = {
+    from: usuario.name,
+    to: 'Todos',
+    text: texto.value,
+    type: 'message'
+  }
+
+  let promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', mensagem)
+  
+  promise.then(function(response) {
+    pegarMensagens()
+  });
+
+  promise.catch(function(error) {
+    window.location.reload();
+  });
+
+  texto.value = '';
+  texto.focus();
+}
+
 entrarNaSala();
+manterConexao();
 pegarMensagens();
