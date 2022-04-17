@@ -12,6 +12,10 @@ header {
     background-color: #fff;
 }
 
+.none {
+    display: none !important;
+}
+
 .cabecalho {
     display: flex;
     justify-content: space-between;
@@ -71,4 +75,56 @@ header {
     font-size: 1.1rem;
     color: #000 !important;
     padding: 0.25rem;
+}
+
+/*  */
+.tela-entrar {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #fff;
+}
+
+.tela-entrar img {
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    width: 120px;
+}
+
+.tela-entrar form {
+    width: 300px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tela-entrar form input {
+    padding: 0.5rem;
+    width: 90%;
+    text-align: center;
+    font-size: 1.1rem;
+    border: 1px solid #D7D7D7;
+    border-radius: 3px;
+}
+
+.tela-entrar form a {
+    margin-top: 1rem;
+    background-color: #D7D7D7;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #696969;
+    border-radius: 3px;
+}
+
+.tela-entrar .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

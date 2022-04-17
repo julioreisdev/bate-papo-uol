@@ -5,8 +5,7 @@ let usuario = {
 let ultimaMensagem;
 
 function entrarNaSala() {
-  let userValido = false;
-  usuario.name = prompt("Qual o seu nome?");
+  usuario.name = document.querySelector(".tela-entrar form input").value;
 
   let promise = axios.post(
     "https://mock-api.driven.com.br/api/v6/uol/participants",
@@ -14,19 +13,36 @@ function entrarNaSala() {
   );
 
   promise.then(function (response) {
-    userValido = true;
+    let login = document.querySelector(".tela-entrar");
+    let form = document.querySelector(".tela-entrar form");
+    let loading = document.querySelector(".loading");
+
+    loading.classList.remove("none");
+    form.classList.add("none");
+
+    setTimeout(function () {
+      login.classList.add("none");
+      manterConexao();
+      pegarMensagens();
+    }, 2000);
   });
 
-  promise.catch(function(error) {
+  promise.catch(function (error) {
     if (error.response.status === 400) {
-      entrarNaSala();
+      let input = document.querySelector(".tela-entrar form input");
+      input.value = "";
+      input.focus();
+      input.setAttribute('placeholder', `${usuario.name} já está em uso`)
     }
-  })
+  });
 }
 
 function manterConexao() {
-  setInterval(function() {
-    let promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', usuario)
+  setInterval(function () {
+    let promise = axios.post(
+      "https://mock-api.driven.com.br/api/v6/uol/status",
+      usuario
+    );
   }, 5000);
 }
 
@@ -41,7 +57,10 @@ function condicoesRenderizarConteudo(mensagens, mensagem) {
           <div class="mensagem">
               <p class="mensagem-corpo"><span class="horario">(${mensagem.time})</span><strong class="nome">${mensagem.from}</strong> para <strong class="destinatario">${mensagem.to}: </strong><span class="texto">${mensagem.text}</span></p>
           </div>`;
-  } else if (mensagem.type === "private_message" && mensagem.to === usuario.name) {
+  } else if (
+    mensagem.type === "private_message" &&
+    mensagem.to === usuario.name
+  ) {
     mensagens.innerHTML += `
           <div class="mensagem privado">
               <p class="mensagem-corpo"><span class="horario">(${mensagem.time})</span><strong class="nome">${mensagem.from}</strong> para <strong class="destinatario">${mensagem.to}: </strong><span class="texto">${mensagem.text}</span></p>
@@ -99,29 +118,28 @@ function pegarMensagens() {
 }
 
 function enviarMensagem() {
-  let texto = document.querySelector('.enviar-mensagem input');
+  let texto = document.querySelector(".enviar-mensagem input");
 
   let mensagem = {
     from: usuario.name,
-    to: 'Todos',
+    to: "Todos",
     text: texto.value,
-    type: 'message'
-  }
+    type: "message",
+  };
 
-  let promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', mensagem)
-  
-  promise.then(function(response) {
-    pegarMensagens()
+  let promise = axios.post(
+    "https://mock-api.driven.com.br/api/v6/uol/messages",
+    mensagem
+  );
+
+  promise.then(function (response) {
+    pegarMensagens();
   });
 
-  promise.catch(function(error) {
+  promise.catch(function (error) {
     window.location.reload();
   });
 
-  texto.value = '';
+  texto.value = "";
   texto.focus();
 }
-
-entrarNaSala();
-manterConexao();
-pegarMensagens();
