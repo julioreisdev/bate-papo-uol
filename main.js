@@ -4,6 +4,7 @@ let usuario = {
 
 let ultimaMensagem;
 
+/* VERIFICAR ENTRADA NA SALA */
 function entrarNaSala() {
   usuario.name = document.querySelector(".tela-entrar form input").value;
 
@@ -37,6 +38,7 @@ function entrarNaSala() {
   });
 }
 
+/* MANTER CONEXÃO DEPOIS DE ENTRAR NA SALA */
 function manterConexao() {
   setInterval(function () {
     let promise = axios.post(
@@ -46,6 +48,7 @@ function manterConexao() {
   }, 5000);
 }
 
+/* VERIFICAR TIPOS DE MENSAGEM E RENDERIZALAS NA TELA */
 function condicoesRenderizarConteudo(mensagens, mensagem) {
   if (mensagem.type === "status") {
     mensagens.innerHTML += `
@@ -68,11 +71,13 @@ function condicoesRenderizarConteudo(mensagens, mensagem) {
   }
 }
 
+/* SEMPRE MANTER AS MENSAGENS RECENTES VISÍVEIS */
 function scrollBottom() {
   let mensagens = document.querySelectorAll(".mensagem");
   mensagens[mensagens.length - 1].scrollIntoView();
 }
 
+/* RENDERIZA NA TELA TODAS AS MENSAGENS DO SERVIDOR */
 function renderizaMensagens(response) {
   let mensagens = document.querySelector(".mensagens");
   for (let i = 0; i < response.data.length; i++) {
@@ -83,6 +88,7 @@ function renderizaMensagens(response) {
   ultimaMensagem = response.data[99];
 }
 
+/* COMPARA SE DUAS MENSAGENS SÃO IGUAIS */
 function comparaMensagens(m1, m2) {
   if (
     m1.from === m2.from &&
@@ -96,6 +102,7 @@ function comparaMensagens(m1, m2) {
   return false;
 }
 
+/* RENDERIZA NA TELA A MENSAGEM MAIS RECENTE DO SERVIDOR */
 function renderizaUltimaMensagem(response) {
   if (!comparaMensagens(response.data[99], ultimaMensagem)) {
     let mensagens = document.querySelector(".mensagens");
@@ -106,6 +113,7 @@ function renderizaUltimaMensagem(response) {
   scrollBottom();
 }
 
+/* BUSCA DE MENSAGENS NO SERVIDOR */
 function pegarMensagens() {
   let promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
   promise.then(renderizaMensagens);
@@ -117,6 +125,7 @@ function pegarMensagens() {
   /* Achei que com 3s o chat fica desatualizado*/
 }
 
+/* ENVIA UMA MENSAGEM PARA O SERVIDOR */
 function enviarMensagem() {
   let texto = document.querySelector(".enviar-mensagem input");
 
@@ -143,3 +152,11 @@ function enviarMensagem() {
   texto.value = "";
   texto.focus();
 }
+
+/* ENVIA UMA MENSAGEM PARA O SERVIDOR COM ENTER */
+document.onkeydown = enter;
+function enter(event) {
+  if (event.keyCode === 13) {
+    enviarMensagem();
+  }
+} 
