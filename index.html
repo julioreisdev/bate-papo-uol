@@ -20,8 +20,8 @@
 <body>
     <header>
         <div class="cabecalho">
-            <img src="static/img/logo 1.png" alt="Logo Bate Papo UOL">
-            <img src="static/img/Vector.png" alt="Ícone usuário">
+            <a href="index.html"><img src="static/img/logo 1.png" alt="Logo Bate Papo UOL"></a>
+            <img src="static/img/Vector.png" alt="Ícone usuário" onclick="sidebar(this)">
         </div>
     </header>
     <main>
@@ -32,6 +32,7 @@
         <input type="text" placeholder="Escreva aqui...">
         <img src="static/img/Vector2.png" onclick="enviarMensagem()">
     </div>
+    <div class="sidebar none"></div>
     <div class="tela-entrar">
         <img src="static/img/logo 1.png" alt="Logo Bate Papo UOL">
         <form>

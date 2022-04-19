@@ -22,6 +22,10 @@ header {
     align-items: center;
 }
 
+.cabecalho img {
+    cursor: pointer;
+}
+
 /*  */
 
 .mensagens {
@@ -78,6 +82,19 @@ header {
 }
 
 /*  */
+
+.sidebar {
+    width: 100vw;
+    height: calc(100vh - 88px - 61px);
+    background-color: #fff;
+    position: fixed;
+    top: 88px;
+    right: 0;
+    transition: all 1s;
+}
+
+/*  */
+
 .tela-entrar {
     position: absolute;
     top: 0;

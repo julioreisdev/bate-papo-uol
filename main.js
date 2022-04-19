@@ -69,6 +69,7 @@ function condicoesRenderizarConteudo(mensagens, mensagem) {
               <p class="mensagem-corpo"><span class="horario">(${mensagem.time})</span><strong class="nome">${mensagem.from}</strong> para <strong class="destinatario">${mensagem.to}: </strong><span class="texto">${mensagem.text}</span></p>
           </div>`;
   }
+  scrollBottom();
 }
 
 /* SEMPRE MANTER AS MENSAGENS RECENTES VISÍVEIS */
@@ -110,7 +111,6 @@ function renderizaUltimaMensagem(response) {
     condicoesRenderizarConteudo(mensagens, mensagem);
   }
   ultimaMensagem = response.data[99];
-  scrollBottom();
 }
 
 /* BUSCA DE MENSAGENS NO SERVIDOR */
@@ -160,3 +160,9 @@ function enter(event) {
     enviarMensagem();
   }
 } 
+
+function sidebar(element) {
+  let sidebar = document.querySelector('.sidebar');
+  sidebar.classList.toggle('none');
+  scrollBottom();
+}
